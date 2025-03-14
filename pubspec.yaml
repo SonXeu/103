@@ -1,0 +1,60 @@
+name: pro_2
+description: A Flutter project for managing fabric samples for tailors.
+
+publish_to: 'none' # Unset this to avoid accidentally publishing to pub.dev.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+ flutter:
+  sdk: flutter
+
+  cloud_firestore: ^latest version
+  image_picker: ^latest version
+  qr_code_scanner: ^ latest version
+
+
+  # Firebase dependencies
+  firebase_core: ^2.5.0  # Firebase Core package (required for Firebase setup)
+  firebase_auth: ^4.0.0   # Firebase Authentication for user management
+
+  firebase_storage: ^10.0.0 # Firebase Storage for storing images
+  # State management (optional, for managing app state)
+  provider: ^6.0.0
+  # Image picker to allow users to pick images for fabric samples
+
+  firebase_messaging: ^latest_version
+  firebase_analytics: ^latest_version
+  flutter_localizations:
+    sdk: flutter
+  # For creating beautiful UI, using icons, etc.
+  flutter_icons: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# Dependency overrides if needed
+dependency_overrides:
+# Example of overriding versions of packages (uncomment if necessary)
+# image_picker: ^0.8.5+3
+
+flutter:
+
+  # To use custom fonts in your app, you can define them here.
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
+
+  # Define assets like images or other files used in your app
+  assets:
+    - assets/images/
+
+  # Define packages that should be bundled with the app
+  uses-material-design: true

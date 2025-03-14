@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "586146513378",
+    "project_id": "do-an-1-d0f58",
+    "storage_bucket": "do-an-1-d0f58.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586146513378:android:d1480a1b5ccc78428ff9bb",
+        "android_client_info": {
+          "package_name": "com.example.fabricmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBLdgjw3aMQlBxV7SvRoxEPpmnkV1iZFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
