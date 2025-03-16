@@ -4,6 +4,7 @@ import 'dart:io';
 import '../models/fabric.dart';
 import '../services/fabric_service.dart';
 import '../services/storage_service.dart';
+import '../providers/user_provider.dart';  // Import UserProvider
 
 class UpdateFabricScreen extends StatefulWidget {
   final String fabricId;
@@ -89,9 +90,12 @@ class _UpdateFabricScreenState extends State<UpdateFabricScreen> {
       imageUrl: imageUrl,
     );
 
+    // Cập nhật mẫu vải
     await FabricService().updateFabric(widget.fabricId, updatedFabric);
+
+    // Thông báo thành công khi cập nhật mẫu vải
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Cập nhật mẫu vải thành công!")));
     Navigator.pop(context);
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Cập nhật thành công!")));
   }
 
   @override
@@ -113,14 +117,17 @@ class _UpdateFabricScreenState extends State<UpdateFabricScreen> {
               controller: _nameController,
               decoration: InputDecoration(labelText: 'Tên mẫu vải'),
             ),
+            SizedBox(height: 16),
             TextField(
               controller: _categoryController,
               decoration: InputDecoration(labelText: 'Loại vải'),
             ),
+            SizedBox(height: 16),
             TextField(
               controller: _materialController,
               decoration: InputDecoration(labelText: 'Chất liệu'),
             ),
+            SizedBox(height: 16),
             TextField(
               controller: _quantityController,
               decoration: InputDecoration(labelText: 'Số lượng'),

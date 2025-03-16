@@ -1,48 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart'; // Firebase Core
-import 'screens/fabric_list_screen.dart'; // Import màn hình danh sách mẫu vải
+import 'package:provider/provider.dart';  // Import provider
+import 'screens/auth_screen.dart';
+import 'screens/fabric_list_screen.dart'; // Màn hình danh sách mẫu vải
+import 'providers/user_provider.dart'; // Import UserProvider
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Đảm bảo Flutter đã khởi tạo
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Khởi tạo Firebase
 
-  await initializeFirebase(); // Gọi hàm khởi tạo Firebase trước khi chạy app
-
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()..fetchUserRole()), // Đảm bảo gọi `fetchUserRole` khi khởi động
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
-Future<void> initializeFirebase() async {
-  try {
-    await Firebase.initializeApp(); // Khởi tạo Firebase
-    debugPrint("🔥 Firebase khởi tạo thành công!");
-  } catch (e) {
-    debugPrint("❌ Lỗi khi khởi tạo Firebase: $e");
-  }
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  bool isDarkMode = false; // Trạng thái giao diện tối
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false, // Ẩn banner debug
       title: 'Fabric Manager',
-      theme: isDarkMode ? ThemeData.dark() : ThemeData.light(),
+      theme: ThemeData.light(),
       home: Scaffold(
         appBar: AppBar(
           title: const Text("Quản lý mẫu vải"),
           actions: [
+            // Nút thay đổi chế độ sáng/tối
             IconButton(
-              icon: Icon(isDarkMode ? Icons.light_mode : Icons.dark_mode),
+              icon: Icon(Theme.of(context).brightness == Brightness.dark ? Icons.light_mode : Icons.dark_mode),
               onPressed: () {
-                setState(() {
-                  isDarkMode = !isDarkMode;
-                });
+                // Thay đổi chế độ sáng/tối
+                final theme = Theme.of(context).brightness == Brightness.dark ? ThemeData.light() : ThemeData.dark();
+                MyApp(theme: theme); // Thực hiện thay đổi theme
               },
             ),
           ],
